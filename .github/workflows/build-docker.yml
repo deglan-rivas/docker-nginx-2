@@ -30,12 +30,19 @@ jobs:
       run:
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD || true
 
-    - name: Build and push Docker image
+    - name: Build Docker image
       env:
         DOCKERHUB_ACCOUNT: ${{ vars.DOCKERHUB_ACCOUNT }}
         DOCKERHUB_IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
         SHA: ${{ github.sha }}
       run:
         docker build -t $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:latest -t $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:$SHA . || true
+
+    - name: Push Docker image
+      env:
+        DOCKERHUB_ACCOUNT: ${{ vars.DOCKERHUB_ACCOUNT }}
+        DOCKERHUB_IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
+        SHA: ${{ github.sha }}
+      run:
         docker push $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:latest || true
         docker push $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:$SHA || true
