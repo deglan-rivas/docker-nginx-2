@@ -36,7 +36,8 @@ jobs:
         DOCKERHUB_IMAGE: ${{ vars.DOCKERHUB_IMAGE }}
         SHA: ${{ github.sha }}
       run:
-        docker build -t $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:latest -t $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:$SHA . || true
+        docker build -t $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:latest || true
+        docker build -t $DOCKERHUB_ACCOUNT/$DOCKERHUB_IMAGE:$SHA . || true
 
     - name: Push Docker image
       env:
