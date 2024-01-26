@@ -23,12 +23,12 @@ jobs:
 
       - name: Pull latest docker image
         run:
-          docker pull ${{env.account}}/${{env.image}}:latest || true
+          docker pull ${{env.account}}/${{env.image}}:latest || true ;
 
       - name: Remove old docker containers
         run:
-          docker stop ${{env.container}} || true
+          docker stop ${{env.container}} || true ;
 
       - name: Release newer container using latest dockerhub image
         run:
-          docker run -d --rm -p ${{env.port_mapping}} --name ${{env.container}} ${{env.account}}/${{env.image}}:latest 
+          docker run -d --rm -p ${{env.port_mapping}} --name ${{env.container}} ${{env.account}}/${{env.image}}:latest ;
